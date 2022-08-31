@@ -1,14 +1,17 @@
-import { createApp } from "vue";
+import Vue from "vue";
 import App from "./App.vue";
 
-const app = createApp(App);
-import gAuthPlugin from "vue3-google-oauth2";
-let gauthClientId = "676785461988-icoil0dtlld2fcp5kb22llst7t94mans.apps.googleusercontent.com";
-app.use(gAuthPlugin, {
-  clientId: gauthClientId,
+Vue.config.productionTip = false;
+
+import GAuth from "vue-google-oauth2";
+const gauthOption = {
+  clientId: "676785461988-icoil0dtlld2fcp5kb22llst7t94mans.apps.googleusercontent.com",
   scope: "profile email",
   prompt: "consent",
   fetch_basic_profile: true,
-});
+};
+Vue.use(GAuth, gauthOption);
 
-app.mount("#app");
+new Vue({
+  render: (h) => h(App),
+}).$mount("#app");
